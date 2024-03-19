@@ -1,4 +1,4 @@
-CREATE TABLE user (
+CREATE TABLE users (
     id bigint NOT NULL,
     email varchar(256) UNIQUE NOT NULL,
     password varchar(128) NOT NULL,
@@ -6,14 +6,14 @@ CREATE TABLE user (
     role_type enum('ADMIN', 'USER'),
     PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-CREATE TABLE book (
+CREATE TABLE books (
     id bigint NOT NULL,
     title varchar(128) NOT NULL,
     author varchar(32) NOT NULL,
     release_date date NOT NULL,
     PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-CREATE TABLE rental (
+CREATE TABLE rentals (
     book_id bigint NOT NULL,
     user_id bigint NOT NULL,
     rental_datetime datetime NOT NULL,

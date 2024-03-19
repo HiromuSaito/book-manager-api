@@ -1,5 +1,6 @@
 package com.book.manager.bookmanager
 
+import org.jetbrains.exposed.sql.Database
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
@@ -7,5 +8,11 @@ import org.springframework.boot.runApplication
 class BookManagerApplication
 
 fun main(args: Array<String>) {
-	runApplication<BookManagerApplication>(*args)
+    Database.connect(
+        "jdbc:mysql://127.0.0.1:3306/db",
+        driver = "com.mysql.jdbc.Driver",
+        user = "admin",
+        password = "password"
+    )
+    runApplication<BookManagerApplication>(*args)
 }
