@@ -1,0 +1,15 @@
+version: '3'
+services:
+  mysql:
+    image: mysql:8.0.23
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: db
+    ports:
+      - "3306:3306"
+    container_name: mysql
+    volumes:
+      - ./mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./mysql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
