@@ -33,15 +33,13 @@ fun toModel(result: ResultRow): BookWithRental {
         result[BooksTable.author],
         result[BooksTable.releaseDate].toLocalDate(),
     )
-    val rental = if (result.hasValue(RentalsTable.bookId)) {
+    val rental = result.getOrNull(RentalsTable.bookId)?.let {
         Rental(
             result[RentalsTable.bookId],
             result[RentalsTable.userId],
             result[RentalsTable.rentalDateTime],
             result[RentalsTable.deadLine]
         )
-    } else {
-        null
     }
     return BookWithRental(book, rental)
 }

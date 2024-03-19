@@ -10,6 +10,8 @@ class BookService(
 ) {
 
     fun getList(): List<BookWithRental> {
+        val result = bookRepository.findAllWithRental()
+        result.forEach { println(it) }
         return bookRepository.findAllWithRental()
     }
 }
