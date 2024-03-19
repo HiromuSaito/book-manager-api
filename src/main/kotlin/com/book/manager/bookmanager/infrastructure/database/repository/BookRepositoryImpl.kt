@@ -71,23 +71,22 @@ class BookRepositoryImpl : BookRepository {
             BooksTable.deleteWhere { BooksTable.id eq id }
         }
     }
-}
 
-
-fun toModel(result: ResultRow): BookWithRental {
-    val book = Book(
-        result[BooksTable.id].value,
-        result[BooksTable.title],
-        result[BooksTable.author],
-        result[BooksTable.releaseDate].toLocalDate(),
-    )
-    val rental = result.getOrNull(RentalsTable.bookId)?.let {
-        Rental(
-            result[RentalsTable.bookId],
-            result[RentalsTable.userId],
-            result[RentalsTable.rentalDateTime],
-            result[RentalsTable.deadLine]
+    private fun toModel(result: ResultRow): BookWithRental {
+        val book = Book(
+            result[BooksTable.id].value,
+            result[BooksTable.title],
+            result[BooksTable.author],
+            result[BooksTable.releaseDate].toLocalDate(),
         )
+        val rental = result.getOrNull(RentalsTable.bookId)?.let {
+            Rental(
+                result[RentalsTable.bookId],
+                result[RentalsTable.userId],
+                result[RentalsTable.rentalDateTime],
+                result[RentalsTable.deadLine]
+            )
+        }
+        return BookWithRental(book, rental)
     }
-    return BookWithRental(book, rental)
 }
