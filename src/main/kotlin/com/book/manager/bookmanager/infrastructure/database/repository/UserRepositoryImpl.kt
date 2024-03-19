@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository
 @Repository
 class UserRepositoryImpl : UserRepository {
 
-    override fun find(email: String): User? {
+    override fun findByEmail(email: String): User? {
         return transaction {
             addLogger(StdOutSqlLogger)
             UsersTable.select {
@@ -22,13 +22,22 @@ class UserRepositoryImpl : UserRepository {
         }
     }
 
+    override fun findById(id: Long): User? {
+        return transaction {
+            addLogger(StdOutSqlLogger)
+            UsersTable.select {
+                UsersTable.id eq id
+            }.map { toModel(it) }.singleOrNull()
+        }
+    }
+
     private fun toModel(result: ResultRow): User {
         return User(
-                result[UsersTable.id].value,
-                result[UsersTable.email],
-                result[UsersTable.password],
-                result[UsersTable.name],
-                result[UsersTable.roleType]
+            result[UsersTable.id].value,
+            result[UsersTable.email],
+            result[UsersTable.password],
+            result[UsersTable.name],
+            result[UsersTable.roleType]
         )
     }
 

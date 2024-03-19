@@ -10,6 +10,6 @@ class AuthenticationService(
 ) {
 
     fun findUser(email: String): User? {
-        return userRepository.find(email)
+        return userRepository.findByEmail(email)
     }
 }

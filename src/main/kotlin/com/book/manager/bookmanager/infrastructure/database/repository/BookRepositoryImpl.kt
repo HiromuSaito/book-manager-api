@@ -84,7 +84,7 @@ class BookRepositoryImpl : BookRepository {
                 result[RentalsTable.bookId],
                 result[RentalsTable.userId],
                 result[RentalsTable.rentalDateTime],
-                result[RentalsTable.deadLine]
+                result[RentalsTable.returnDeadline]
             )
         }
         return BookWithRental(book, rental)
