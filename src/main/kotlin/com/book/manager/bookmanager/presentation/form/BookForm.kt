@@ -40,3 +40,9 @@ data class RegisterBookRequest(
     val author: String,
     val releaseDate: LocalDate
 )
+
+data class UpdateBookRequest(
+    val title: String,
+    val author: String,
+    val releaseDate: LocalDate
+)

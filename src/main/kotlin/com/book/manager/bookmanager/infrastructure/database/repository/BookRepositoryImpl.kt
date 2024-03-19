@@ -52,6 +52,17 @@ class BookRepositoryImpl : BookRepository {
             }
         }
     }
+
+    override fun save(book: Book) {
+        transaction {
+            addLogger(StdOutSqlLogger)
+            BooksTable.update({ BooksTable.id eq book.id }) {
+                it[title] = book.title
+                it[author] = book.author
+                it[releaseDate] = book.releaseDate.atStartOfDay()
+            }
+        }
+    }
 }
 
 

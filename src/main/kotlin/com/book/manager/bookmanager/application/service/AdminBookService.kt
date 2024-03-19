@@ -13,4 +13,9 @@ class AdminBookService(
         bookRepository.findWithRental(book.id)?.let { throw IllegalArgumentException("既に存在する書籍ID: ${book.id}") }
         bookRepository.register(book)
     }
+
+    fun update(book: Book) {
+        bookRepository.findWithRental(book.id) ?: throw IllegalArgumentException("存在しない書籍ID: ${book.id}")
+        bookRepository.save(book)
+    }
 }
