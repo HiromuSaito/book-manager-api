@@ -4,7 +4,8 @@ import com.book.manager.bookmanager.domain.model.Book
 import com.book.manager.bookmanager.domain.model.BookWithRental
 import com.book.manager.bookmanager.domain.model.Rental
 import com.book.manager.bookmanager.domain.repository.BookRepository
-import com.book.manager.bookmanager.infrastructure.database.table.*
+import com.book.manager.bookmanager.infrastructure.database.table.BooksTable
+import com.book.manager.bookmanager.infrastructure.database.table.RentalsTable
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.springframework.stereotype.Repository
@@ -37,9 +38,22 @@ class BookRepositoryImpl : BookRepository {
                 .select { BooksTable.id eq id }
                 .map { toModel(it) }
                 .singleOrNull()
-        } 
+        }
+    }
+
+    override fun register(book: Book) {
+        transaction {
+            addLogger(StdOutSqlLogger)
+            BooksTable.insert {
+                it[id] = book.id
+                it[title] = book.title
+                it[author] = book.author
+                it[releaseDate] = book.releaseDate.atStartOfDay()
+            }
+        }
     }
 }
+
 
 fun toModel(result: ResultRow): BookWithRental {
     val book = Book(
