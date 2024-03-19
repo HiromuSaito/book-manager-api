@@ -4,7 +4,7 @@ import com.book.manager.bookmanager.domain.model.BookWithRental
 import com.fasterxml.jackson.annotation.JsonProperty
 
 
-data class BookList(val bookList: List<Book>)
+data class GetBookListResponse(val bookList: List<Book>)
 
 data class Book(
     val id: Long,
@@ -15,3 +15,5 @@ data class Book(
 ) {
     constructor(model: BookWithRental) : this(model.book.id, model.book.title, model.book.author, model.isRental)
 }
+
+// data class GetBookDetailResponse
