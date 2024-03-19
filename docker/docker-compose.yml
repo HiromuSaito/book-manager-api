@@ -13,3 +13,9 @@ services:
     volumes:
       - ./mysql/my.cnf:/etc/mysql/conf.d/my.cnf
       - ./mysql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+  redis:
+    image: "redis:latest"
+    ports:
+      - "6379:6379"
+    volumes:
+      - "./redis:/data"
