@@ -7,6 +7,7 @@ import com.book.manager.bookmanager.domain.repository.BookRepository
 import com.book.manager.bookmanager.infrastructure.database.table.BooksTable
 import com.book.manager.bookmanager.infrastructure.database.table.RentalsTable
 import org.jetbrains.exposed.sql.*
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.springframework.stereotype.Repository
 
@@ -61,6 +62,13 @@ class BookRepositoryImpl : BookRepository {
                 it[author] = book.author
                 it[releaseDate] = book.releaseDate.atStartOfDay()
             }
+        }
+    }
+
+    override fun delete(id: Long) {
+        transaction {
+            addLogger(StdOutSqlLogger)
+            BooksTable.deleteWhere { BooksTable.id eq id }
         }
     }
 }

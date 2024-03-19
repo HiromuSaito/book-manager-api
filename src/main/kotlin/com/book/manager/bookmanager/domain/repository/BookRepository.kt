@@ -8,4 +8,5 @@ interface BookRepository {
     fun findWithRental(id: Long): BookWithRental?
     fun register(book: Book)
     fun save(book: Book)
+    fun delete(id: Long)
 }

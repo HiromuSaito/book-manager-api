@@ -18,4 +18,9 @@ class AdminBookService(
         bookRepository.findWithRental(book.id) ?: throw IllegalArgumentException("存在しない書籍ID: ${book.id}")
         bookRepository.save(book)
     }
+
+    fun delete(id: Long) {
+        bookRepository.findWithRental(id) ?: throw IllegalArgumentException("存在しない書籍ID: $id")
+        bookRepository.delete(id)
+    }
 }
