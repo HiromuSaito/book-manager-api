@@ -10,8 +10,11 @@ class BookService(
 ) {
 
     fun getList(): List<BookWithRental> {
-        val result = bookRepository.findAllWithRental()
-        result.forEach { println(it) }
         return bookRepository.findAllWithRental()
     }
+
+    fun getDetail(id: Long): BookWithRental {
+        return bookRepository.findWithRental(id) ?:throw IllegalArgumentException()
+    }
 }
+

@@ -24,6 +24,21 @@ class BookRepositoryImpl : BookRepository {
                 .toList()
         }
     }
+
+    override fun findWithRental(id: Long): BookWithRental? {
+        return transaction {
+            addLogger(StdOutSqlLogger)
+            BooksTable.join(
+                RentalsTable,
+                JoinType.LEFT,
+                onColumn = BooksTable.id,
+                otherColumn = RentalsTable.bookId
+            )
+                .select { BooksTable.id eq id }
+                .map { toModel(it) }
+                .singleOrNull()
+        } 
+    }
 }
 
 fun toModel(result: ResultRow): BookWithRental {
