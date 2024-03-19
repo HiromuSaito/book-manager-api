@@ -4,7 +4,7 @@ import com.book.manager.bookmanager.domain.enum.RoleType
 import org.jetbrains.exposed.dao.id.LongIdTable
 
 
-object UsersTable : LongIdTable("books") {
+object UsersTable : LongIdTable("users") {
     val email = varchar("email", 256)
     val password = varchar("password", 128)
     val name = varchar("name", 32)
