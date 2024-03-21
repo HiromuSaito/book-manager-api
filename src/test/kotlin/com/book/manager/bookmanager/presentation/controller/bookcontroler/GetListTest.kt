@@ -1,4 +1,4 @@
-package com.book.manager.bookmanager.presentation.controller.bookcontrooler
+package com.book.manager.bookmanager.presentation.controller.bookcontroler
 
 import com.book.manager.bookmanager.application.service.BookService
 import com.book.manager.bookmanager.domain.model.BookWithRental
