@@ -13,6 +13,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - name: Grant gradle permission
+        run: chmod +x ./gradlew
       - name: Run test
         run: ./gradlew test
