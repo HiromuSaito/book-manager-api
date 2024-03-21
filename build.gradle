@@ -36,6 +36,9 @@ dependencies {
 
     implementation 'org.springframework.session:spring-session-data-redis:3.2.1'
     implementation 'redis.clients:jedis:5.1.2'
+
+    testImplementation 'io.kotest:kotest-runner-junit5:4.6.0'
+    testImplementation 'io.mockk:mockk:1.13.10'
 }
 
 tasks.withType(KotlinCompile) {
@@ -45,6 +48,6 @@ tasks.withType(KotlinCompile) {
     }
 }
 
-tasks.named('test') {
+test {
     useJUnitPlatform()
 }
