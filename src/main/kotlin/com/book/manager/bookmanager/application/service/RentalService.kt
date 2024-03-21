@@ -7,8 +7,6 @@ import com.book.manager.bookmanager.domain.repository.UserRepository
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
 
-private const val RENTAL_TERM_DAYS: Long = 14
-
 @Service
 class RentalService(
     private val userRepository: UserRepository,
@@ -23,8 +21,7 @@ class RentalService(
         if (bookWithRental.isRental) throw IllegalArgumentException("貸出中のbookId:${bookId}")
 
         val now = LocalDateTime.now()
-        val returnDate = now.plusDays(RENTAL_TERM_DAYS)
-        val rental = Rental(bookId, userId, now, returnDate)
+        val rental = Rental(bookId, userId, now)
         rentalRepository.startRental(rental)
     }
 
