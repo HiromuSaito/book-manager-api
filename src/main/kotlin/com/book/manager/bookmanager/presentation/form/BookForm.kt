@@ -51,11 +51,13 @@ data class RegisterBookRequest(
     val id: Long,
     val title: String,
     val author: String,
+    @JsonFormat(pattern = "yyyy/MM/dd")
     val releaseDate: LocalDate
 )
 
 data class UpdateBookRequest(
     val title: String,
     val author: String,
+    @JsonFormat(pattern = "yyyy/MM/dd")
     val releaseDate: LocalDate
 )
